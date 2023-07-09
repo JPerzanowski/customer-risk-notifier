@@ -1,0 +1,18 @@
+version: '3.1'
+services:
+  app:
+    container_name: app-customer-risk-notifier
+    image: app-springboot-postgresql
+    build: ./
+    ports:
+      - "7777:8080"
+    depends_on:
+      - dbpostgresql-crn
+  dbpostgresql-crn:
+    image: postgres
+    ports:
+      - "7776:5432"
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=customer-risk-notifier
