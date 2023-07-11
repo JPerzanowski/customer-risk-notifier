@@ -11,6 +11,6 @@ spring:
       ddl-auto: create-drop
 app:
   job:
-    cron-customer-risk-calculation: 0 0 12 * * ?
+    cron-customer-risk-calculation: 0 0 20 * * ?
   file:
     location: /upload
