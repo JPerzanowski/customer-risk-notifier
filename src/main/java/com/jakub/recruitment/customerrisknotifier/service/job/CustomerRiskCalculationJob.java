@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -26,7 +27,20 @@ public class CustomerRiskCalculationJob {
 
     @Scheduled(cron = "${app.job.cron-customer-risk-calculation}")
     public void customerRiskCalculationJob() throws IOException {
+        importCsvFilesFromFolder(uploadFileLocation);
+    }
 
+    private void importCsvFilesFromFolder(String folderPath) throws IOException {
+        File folder = new File(folderPath);
+        File[] files = folder.listFiles();
+
+        if (files != null) {
+            for (File file : files) {
+                if (file.isFile() && file.getName().toLowerCase().endsWith(".csv")) {
+                    importCsv(file.getPath());
+                }
+            }
+        }
     }
 
     private void importCsv(String filePath) throws IOException {
