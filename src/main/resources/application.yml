@@ -9,3 +9,8 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: create-drop
+app:
+  job:
+    cron-customer-risk-calculation: 0 0 12 * * ?
+  file:
+    location: /upload
