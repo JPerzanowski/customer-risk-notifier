@@ -14,3 +14,10 @@ app:
     cron-customer-risk-calculation: 0 0 20 * * ?
   file:
     location: /upload
+email:
+  address:
+    directors: dyrektorjednostki@fikcyjnafirma.com
+    coordinators: koordynatorkoordynatorow@fikcyjnafirma.com
+  message:
+    typeA5-type1: Uprzejmie informuję, że zmieniła się klasa ryzyka dla klienta
+    type2: Proszę o przegląd ryzyka klienta

@@ -1,4 +1,4 @@
-package com.jakub.recruitment.customerrisknotifier.service.job;
+package com.jakub.recruitment.customerrisknotifier.service;
 
 import com.jakub.recruitment.customerrisknotifier.entity.CustomerDetails;
 import com.jakub.recruitment.customerrisknotifier.entity.CustomerRepository;
