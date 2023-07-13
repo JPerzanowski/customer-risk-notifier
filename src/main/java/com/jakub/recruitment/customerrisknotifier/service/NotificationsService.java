@@ -1,6 +1,6 @@
 package com.jakub.recruitment.customerrisknotifier.service;
 
-import com.example.customer.model.entity.CustomerEntity;
+import com.jakub.recruitment.customerrisknotifier.model.entity.CustomerEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
