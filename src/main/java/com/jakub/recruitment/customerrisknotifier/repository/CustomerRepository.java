@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -24,4 +25,8 @@ public interface CustomerRepository extends JpaRepository<CustomerEntity, Intege
     CustomerEntity findFirstByCustomerIdOrderByInfoAsOfDateDesc(Integer customerId);
 
     List<CustomerEntity> findTop2ByCustomerIdOrderByInfoAsOfDateDesc(Integer customerId);
+
+    @Query("select ce from CustomerEntity ce WHERE ce.customerId = ?1 AND ce.infoAsOfDate = ?2")
+    List<CustomerEntity> findCustomerByIdAndDate(Integer customerId, Date date);
+
 }
