@@ -1,6 +1,7 @@
 package com.jakub.recruitment.customerrisknotifier.controller;
 
 import com.jakub.recruitment.customerrisknotifier.model.dto.CustomerDto;
+import com.jakub.recruitment.customerrisknotifier.model.dto.NoteDto;
 import com.jakub.recruitment.customerrisknotifier.service.CustomerRiskService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -24,5 +25,20 @@ public class CustomerRiskNotifierController {
     public List<CustomerDto> getCustomer(@PathVariable("customer_id") Integer customerId,
                                          @PathVariable("date") Date date) {
         return ResponseEntity.ok(customerRiskService.findCustomerByIdAndDate(customerId, date)).getBody();
+    }
+
+    @PostMapping("/api/customer/{customer_id}/note")
+    public ResponseEntity<String> addCustomerNote(@PathVariable("customer_id") Integer customerId, @RequestBody NoteDto noteDto) throws Exception {
+        customerRiskService.addCustomerNote(customerId, noteDto);
+        return ResponseEntity.ok("Note added successfully");
+    }
+
+    @GetMapping("/api/customer/{customerId}/note")
+    public List<NoteDto> getNotesByCustomerIdAndDate(
+            @PathVariable("customerId") Integer customerId,
+            @RequestParam("since") String since,
+            @RequestParam("until") String until
+    ) throws Exception {
+        return customerRiskService.getNotesByCustomerIdAndDateRange(customerId, since, until);
     }
 }

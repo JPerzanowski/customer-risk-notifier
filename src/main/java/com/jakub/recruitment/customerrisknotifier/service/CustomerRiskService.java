@@ -1,13 +1,16 @@
 package com.jakub.recruitment.customerrisknotifier.service;
 
 import com.jakub.recruitment.customerrisknotifier.model.dto.CustomerDto;
+import com.jakub.recruitment.customerrisknotifier.model.dto.NoteDto;
 import com.jakub.recruitment.customerrisknotifier.model.entity.CustomerEntity;
+import com.jakub.recruitment.customerrisknotifier.model.entity.NoteEntity;
 import com.jakub.recruitment.customerrisknotifier.repository.CustomerRepository;
 import com.jakub.recruitment.customerrisknotifier.service.utils.Utils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -57,5 +60,43 @@ public class CustomerRiskService {
         if (sizeOfCustomers < 2 || customerEntities.get(0).getCustomerRiskClass().equals(customerEntities.get(1).getCustomerRiskClass()))
             return isChanged;
         return true;
+    }
+
+    public void addCustomerNote(Integer customerId, NoteDto noteDto) throws Exception {
+        CustomerEntity customerEntity = customerRepository.findFirstByCustomerIdOrderByInfoAsOfDateDesc(customerId);
+
+        if (customerEntity == null)
+            throw new Exception("User with id " + customerId + " not found.");
+
+        NoteEntity note = new NoteEntity();
+        note.setCustomerEntity(customerEntity);
+        note.setType(noteDto.getType());
+        note.setTitle(noteDto.getTitle());
+        note.setContent(noteDto.getContent());
+        note.setNoteStartDay(Utils.convertDateToString());
+
+        customerEntity.addNote(note);
+
+        customerRepository.save(customerEntity);
+    }
+
+    public List<NoteDto> getNotesByCustomerIdAndDateRange(Integer customerId, String since, String until) throws Exception {
+        CustomerEntity customerEntity = customerRepository.findFirstByCustomerIdOrderByInfoAsOfDateDesc(customerId);
+        List<NoteDto> noteDtoList = new ArrayList<>();
+
+        if (customerEntity == null)
+            throw new Exception("User with id " + customerId + " not found.");
+
+        List<NoteEntity> noteEntityList = customerEntity.getNotes().stream()
+                .filter(note -> note.getNoteStartDay().compareTo(since) >= 0 && note.getNoteStartDay().compareTo(until) <= 0)
+                .toList();
+
+        for (NoteEntity noteEntity : noteEntityList) {
+            NoteDto noteDto = new NoteDto();
+            noteDto.setCustomerId(customerId);
+            BeanUtils.copyProperties(noteEntity, noteDto);
+            noteDtoList.add(noteDto);
+        }
+        return noteDtoList;
     }
 }

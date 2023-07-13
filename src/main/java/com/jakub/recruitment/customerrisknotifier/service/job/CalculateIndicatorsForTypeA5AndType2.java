@@ -67,5 +67,4 @@ public class CalculateIndicatorsForTypeA5AndType2 {
             return 0.2;
         }
     }
-
 }
