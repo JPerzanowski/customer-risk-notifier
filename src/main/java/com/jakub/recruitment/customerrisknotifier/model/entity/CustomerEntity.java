@@ -51,6 +51,13 @@ public class CustomerEntity {
     @Column(name = "r_2")
     private Double r2;
 
+    @OneToMany(mappedBy = "customerEntity", cascade = CascadeType.ALL)
+    private List<NoteEntity> notes = new ArrayList<>();
+
+    public void addNote(NoteEntity note) {
+        notes.add(note);
+        note.setCustomerEntity(this);
+    }
     public CustomerEntity(Date infoAsOfDate, Integer customerId, String customerName, Date customerStartDate,
                           String customerType, Double customerIncome, String customerRiskClass,
                           String customerBusinessType, Double r1, Double r2) {

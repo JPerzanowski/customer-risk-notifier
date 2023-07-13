@@ -18,6 +18,9 @@
 	<properties>
 		<java.version>17</java.version>
 		<postgresql.version>42.6.0</postgresql.version>
+		<parser.version>2.9.1</parser.version>
+		<csv.version>1.9.0</csv.version>
+		<webmvc.version>2.1.0</webmvc.version>
 	</properties>
 
 	<dependencies>
@@ -37,17 +40,17 @@
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-			<version>2.1.0</version>
+			<version>${webmvc.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.univocity</groupId>
 			<artifactId>univocity-parsers</artifactId>
-			<version>2.9.1</version>
+			<version>${parser.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-csv</artifactId>
-			<version>1.9.0</version>
+			<version>${csv.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

@@ -28,5 +28,4 @@ public interface CustomerRepository extends JpaRepository<CustomerEntity, Intege
 
     @Query("select ce from CustomerEntity ce WHERE ce.customerId = ?1 AND ce.infoAsOfDate = ?2")
     List<CustomerEntity> findCustomerByIdAndDate(Integer customerId, Date date);
-
 }
