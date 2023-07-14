@@ -1,4 +1,4 @@
-package com.jakub.recruitment.customerrisknotifier.service;
+package com.jakub.recruitment.customerrisknotifier.service.job;
 
 import com.jakub.recruitment.customerrisknotifier.model.dto.CustomerDto;
 import com.jakub.recruitment.customerrisknotifier.model.dto.NoteDto;
