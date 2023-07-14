@@ -2,7 +2,7 @@ package com.jakub.recruitment.customerrisknotifier.controller;
 
 import com.jakub.recruitment.customerrisknotifier.model.dto.CustomerDto;
 import com.jakub.recruitment.customerrisknotifier.model.dto.NoteDto;
-import com.jakub.recruitment.customerrisknotifier.service.CustomerRiskService;
+import com.jakub.recruitment.customerrisknotifier.service.job.CustomerRiskService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
